@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Pool Position: a scorebook for two pool rivals on iPhone, iPhone Duo and iPad, and an early look at its 3D pool game for iPhone and Apple TV.">
+<meta property="og:title" content="Pool Position">
+<meta property="og:description" content="A scorebook for two pool rivals, and a pool game that plays like your real table.">
+<meta property="og:image" content="https://poolposition.joshramey.com/img/tv-rack.jpg">
+<title>Pool Position</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a pool hall at night. A scoreboard band over an oak rail, then alternating feature rows of real screenshots on the app's navy cloth. */
+:root {
+  --ground: #0b0f1a;      /* the hall after dark */
+  --cloth: #16213a;       /* the app's navy cloth */
+  --panel: #141b2b;
+  --line: #26304a;
+  --ink: #eef1f6;
+  --soft: #c6cdda;
+  --muted: #8b95a8;
+  --oak: #b07a3c;         /* the rail */
+  --chalk: #5d9df2;       /* chalk blue, the app's selection color */
+  --solid: #f2c230;       /* the 12 ball */
+  --stripe: #2f55d4;      /* the 5 ball */
+  --felt: #2f9e6e;        /* the game's preview tag */
+  --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body: "Source Sans 3", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+body { background: var(--ground); color: var(--ink); font: 400 18px/1.6 var(--body); margin: 0; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ground); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--chalk); }
+:focus-visible { outline: 2px solid var(--solid); outline-offset: 3px; }
+
+/* Scoreboard band over the rail, as the Table page opens */
+.band { background: linear-gradient(180deg, #1b2850, var(--cloth)); }
+.board { display: grid; grid-template-columns: auto auto auto 1fr; gap: 18px; align-items: center; padding-block: 14px; }
+.ball { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.55), transparent 32%), var(--c); box-shadow: inset -4px -6px 10px rgba(0,0,0,.35); }
+.ball i { width: 20px; height: 20px; border-radius: 50%; background: #fff; color: #111; font: 600 11px/20px var(--mono); font-style: normal; text-align: center; }
+.score { font-family: var(--display); font-weight: 800; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
+.score small { display: block; font: 500 11px var(--mono); letter-spacing: .14em; color: var(--muted); margin-bottom: 4px; }
+.board .rack { justify-self: end; font-family: var(--mono); font-size: 13px; color: var(--muted); text-align: right; }
+.rail { height: 18px; background: linear-gradient(180deg, #d39a55, var(--oak) 45%, #6e4520); position: relative; }
+.rail::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, #f4e6c8 0 3px, transparent 4px) center / 120px 18px repeat-x; opacity: .9; }
+.rail + .glow { height: 2px; background: var(--chalk); box-shadow: 0 0 14px var(--chalk); }
+
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; padding-block: 64px 48px; }
+.eyebrow { font-family: var(--mono); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--chalk); font-size: 13px; margin: 0 0 12px; }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(56px, 9.5vw, 116px); line-height: .9; margin: 0 0 22px; letter-spacing: -.02em; }
+.lede { font-size: 21px; color: var(--ink); max-width: 34ch; margin: 0 0 18px; text-wrap: pretty; }
+.sub { color: var(--soft); max-width: 44ch; margin: 0; }
+.devices { position: relative; justify-self: center; width: min(100%, 470px); display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+.devices img { border-radius: 30px; border: 6px solid #1c2233; box-shadow: 0 30px 70px rgba(0,0,0,.6); }
+.devices img + img { margin-top: 56px; }
+
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.facts div { padding: 20px 18px; border-left: 1px solid var(--line); }
+.facts div:first-child { border-left: 0; }
+.facts b { display: block; font-family: var(--display); font-size: 40px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.facts span { color: var(--muted); font-size: 15px; }
+
+section.feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 56px; align-items: center; padding-block: 72px; border-bottom: 1px solid var(--line); }
+section.feature.flip > .shot { order: -1; }
+.shot { margin: 0; justify-self: center; width: min(100%, 560px); }
+.shot img { border-radius: 18px; border: 1px solid var(--line); width: 100%; }
+.shot.phone { width: min(100%, 330px); }
+.shot.phone img, .shot.pair img { border-radius: 30px; border: 6px solid #1c2233; }
+.shot.pair { width: min(100%, 560px); display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: end; }
+.shot.wide img, img.duo { border-radius: 26px; border: 8px solid #1c2233; }
+.shot figcaption { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 10px; grid-column: 1 / -1; }
+h2 { font-family: var(--display); font-weight: 800; font-size: clamp(32px, 4.4vw, 50px); line-height: 1.02; margin: 0 0 16px; letter-spacing: -.01em; text-wrap: balance; }
+.tag { display: inline-block; font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; padding: 4px 10px; border-left: 4px solid var(--c, var(--chalk)); background: var(--panel); margin-bottom: 14px; }
+.feature p { color: var(--soft); max-width: 52ch; margin: 0 0 14px; }
+ul.ticks { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; max-width: 54ch; }
+ul.ticks li { padding-left: 22px; position: relative; color: var(--soft); }
+ul.ticks li::before { content: ""; position: absolute; left: 0; top: .5em; width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--chalk)); }
+
+/* The turn to the game: a full-width break */
+.turn { padding-block: 88px 24px; text-align: left; }
+.turn .preview { display: inline-block; font: 600 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #06140d; background: var(--felt); border-radius: 999px; padding: 4px 12px; margin-bottom: 18px; }
+.turn h2 { font-size: clamp(40px, 6.4vw, 76px); max-width: 16ch; }
+.turn p { color: var(--soft); max-width: 60ch; margin: 0; font-size: 19px; }
+
+/* The stroke: the card the game shows after every shot */
+.stroke { padding-block: 64px 80px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 56px; align-items: center; }
+.stroke .phones { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: min(100%, 520px); justify-self: center; }
+.stroke .phones img { border-radius: 30px; border: 6px solid #1c2233; }
+.card { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--felt); padding: 16px 18px; margin-bottom: 14px; }
+.card .who { font: 500 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; }
+.card p { margin: 6px 0 0; font-size: 19px; color: var(--ink); }
+.card.bad { border-left-color: #c8553d; }
+
+.how { padding-block: 72px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; border-bottom: 1px solid var(--line); }
+.how p { color: var(--soft); }
+.pipe { display: grid; gap: 10px; font-family: var(--mono); font-size: 14px; align-content: start; }
+.pipe div { background: var(--panel); border: 1px solid var(--line); padding: 12px 16px; display: flex; justify-content: space-between; gap: 12px; }
+.pipe div span { color: var(--muted); text-align: right; }
+
+/* Apple TV: the phone is the cue */
+.tv { padding-block: 80px; border-bottom: 1px solid var(--line); }
+.tv .head { max-width: 62ch; margin-bottom: 32px; }
+.tv .head p { color: var(--soft); margin: 0; }
+.tv .grid { display: grid; grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr); gap: 24px; align-items: end; }
+.tv .grid img { border-radius: 14px; border: 1px solid var(--line); }
+.tv .grid .remote { border-radius: 30px; border: 6px solid #1c2233; }
+.tv .stack { display: grid; gap: 24px; }
+.join { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; margin-top: 40px; }
+.dev { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 20px 18px; text-align: center; }
+.dev b { display: block; font-family: var(--display); font-size: 22px; font-weight: 800; }
+.dev small { color: var(--muted); font-size: 14px; display: block; margin-top: 4px; }
+.code { font: 600 30px var(--mono); color: var(--chalk); letter-spacing: .1em; margin-top: 10px; }
+.link { position: relative; height: 4px; background: repeating-linear-gradient(90deg, var(--chalk) 0 10px, transparent 10px 18px); margin-inline: -1px; }
+.link span { position: absolute; left: 50%; top: -32px; transform: translateX(-50%); white-space: nowrap; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.link span.b { top: 14px; }
+@media (prefers-reduced-motion: no-preference) {
+  .link { background-size: 18px 4px; animation: flow 1s linear infinite; }
+  @keyframes flow { to { background-position: 18px 0; } }
+}
+
+.note { padding-block: 48px 80px; color: var(--muted); font-size: 15px; max-width: 74ch; }
+.note p { margin: 0 0 12px; }
+.note strong { color: var(--ink); }
+
+@media (max-width: 860px) {
+  .hero, section.feature, .how, .stroke { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  section.feature.flip > .shot { order: 0; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts div:nth-child(3) { border-left: 0; }
+  .facts div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .tv .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 160px); }
+  .board .rack { display: none; }
+}
+@media (max-width: 520px) {
+  .board { grid-template-columns: auto auto auto; gap: 12px; }
+  .score { font-size: 32px; }
+  .ball { width: 36px; height: 36px; }
+  .tv .grid { grid-template-columns: minmax(0, 1fr); }
+  .tv .grid .remote { width: 60%; justify-self: center; }
+  .join { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+  .link { height: 40px; width: 4px; justify-self: center; background: repeating-linear-gradient(180deg, var(--chalk) 0 10px, transparent 10px 18px); animation: none; }
+  .link span { top: 10px; left: 16px; transform: none; } .link span.b { display: none; }
+}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}*,*::before,*::after{box-sizing:border-box}</style>
+</head>
+<body>
+
+<div class="band">
+  <div class="wrap board" aria-label="Sample scoreboard: Jordan 73, Casey 70, all-time sets">
+    <span class="ball" style="--c: var(--stripe)"><i>5</i></span>
+    <div class="score"><small>ALL-TIME SETS</small>73–70</div>
+    <span class="ball" style="--c: var(--solid)"><i>12</i></span>
+    <div class="rack">8-ball · rack 2<br>Jordan has the break</div>
+  </div>
+</div>
+<div class="rail" aria-hidden="true"></div><div class="glow" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">iPhone · iPhone Duo · iPad · Apple TV</p>
+      <h1>Pool Position</h1>
+      <p class="lede">A scorebook for two rivals who play real pool, week after week.</p>
+      <p class="sub">Score every set at the table, keep the all-time record, remember the halls and play your own music. Next to it, an early look at a 3D pool game that keeps score in the same book, with your phone as the cue.</p>
+    </div>
+    <div class="devices">
+      <img src="img/phone-table.jpg" alt="The Table page on iPhone: Jordan vs Casey, 73 to 70 in all-time sets, with buttons to rack a best-of-three 8-ball or 9-ball set" width="700" height="1522">
+      <img src="img/phone-aim.jpg" alt="The pool game on iPhone: looking down the cue at the racked balls, with a spin pad and a stroke pad" width="700" height="1522">
+    </div>
+  </header>
+
+  <div class="facts">
+    <div><b>2</b><span>phones, one shared book, synced live through iCloud</span></div>
+    <div><b>Best of 3</b><span>8-ball and 9-ball sets, rack by rack</span></div>
+    <div><b>1 ms</b><span>physics step in the game, checked against published research</span></div>
+    <div><b>0</b><span>ads, coins or cues you can buy that play better</span></div>
+  </div>
+
+  <section class="feature" style="--c: var(--solid)">
+    <div>
+      <span class="tag" style="--c: var(--solid)">The set</span>
+      <h2>Tap who won the rack. That's it.</h2>
+      <p>Built to be used with a cue in one hand. The whole set fits on one screen, with nothing to scroll.</p>
+      <ul class="ticks">
+        <li>Who breaks is shown big until the first rack is won, so there's no arguing over it.</li>
+        <li>Solids or stripes for each player, and the wild moments: 8 on the break, ran the table, scratched on the 8, golden break.</li>
+        <li>Undo the last rack or scrap the set, kept well away from the winner buttons.</li>
+        <li>The score sits on the Lock Screen as a Live Activity, with "won the rack" buttons, and both phones update at once.</li>
+      </ul>
+    </div>
+    <figure class="shot phone"><img src="img/phone-set.jpg" alt="A set in progress: 1 to 0, Jordan on stripes and Casey on solids, wild-moment buttons, and big Jordan won and Casey won buttons" loading="lazy" width="700" height="1522"><figcaption>iPhone · 8-ball, rack 2 at The Corner Pocket</figcaption></figure>
+  </section>
+
+  <section class="feature flip" style="--c: var(--chalk)">
+    <div>
+      <span class="tag">Record</span>
+      <h2>The rivalry, all time</h2>
+      <p>Every set goes in the book, so the record settles the arguments.</p>
+      <ul class="ticks">
+        <li>Sets and racks won, split by 8-ball and 9-ball.</li>
+        <li>Your record on solids versus stripes, and how often each wild moment happened to whom.</li>
+        <li>Trends: the race over time, by month and by hall.</li>
+        <li>History of every set: the score and where it was played.</li>
+      </ul>
+    </div>
+    <figure class="shot pair"><img src="img/phone-record.jpg" alt="Record page on iPhone with sets won, solids or stripes and wild moments" loading="lazy" width="700" height="1522"><img src="img/ipad-record.jpg" alt="Record page on iPad with a Trends chart of the race between the two players" loading="lazy" width="1240" height="1654" style="border-radius:22px"><figcaption>iPhone and iPad · Record with Trends</figcaption></figure>
+  </section>
+
+  <section class="feature" style="--c: var(--oak)">
+    <div>
+      <span class="tag" style="--c: var(--oak)">Halls and jukebox</span>
+      <h2>Your hall, your playlist</h2>
+      <p>The places you play are part of the rivalry, so the book keeps them.</p>
+      <ul class="ticks">
+        <li>Halls with photos, notes and a map, and the record at each one.</li>
+        <li>The nearest hall is picked for you when a set starts.</li>
+        <li>A jukebox bar on every page: an Apple Music playlist for the book that plays on both phones.</li>
+        <li>The look comes from real photos of a pool hall: a table seen from the near rail, lit by a lamp that shifts as you tilt the phone. Pick the cloth color.</li>
+      </ul>
+    </div>
+    <figure class="shot wide" style="width:min(100%,620px)"><img src="img/duo-open-halls.jpg" alt="Halls on an iPhone Duo opened flat: three halls with their records beside a map of where they are" loading="lazy" width="1400" height="984"><figcaption>iPhone Duo, open · Halls with the map</figcaption></figure>
+  </section>
+
+  <section class="feature flip" style="--c: var(--chalk)">
+    <div>
+      <span class="tag">iPhone Duo</span>
+      <h2>Made for the foldable first</h2>
+      <p>Pool Position was designed on the iPhone Duo and fits every way it folds.</p>
+      <ul class="ticks">
+        <li>Folded: the whole app on the cover screen, tabs in the side strip.</li>
+        <li>Half open like a laptop during a set: the score up top, the buttons below, nothing on the fold.</li>
+        <li>Open flat: a tablet layout with room for the record, the history and the map side by side.</li>
+        <li>Just as much at home on a regular iPhone and on iPad.</li>
+      </ul>
+    </div>
+    <figure class="shot" style="width:min(100%,620px);display:grid;gap:18px">
+      <img class="duo" src="img/duo-open-set.jpg" alt="A set on the Duo opened flat: 0 to 0, both players open, with the winner buttons on either side" loading="lazy" width="1400" height="984">
+      <div class="shot pair" style="width:100%"><img src="img/duo-folded.jpg" alt="The Table page on the Duo's cover screen with tabs in the side strip" loading="lazy" width="1000" height="1454"><img src="img/duo-laptop.jpg" alt="The Duo half open like a laptop: the score on the top half, the buttons on the bottom half" loading="lazy" width="1000" height="1422"></div>
+      <figcaption>Duo open flat · folded · half open like a laptop</figcaption>
+    </figure>
+  </section>
+
+  <div class="turn">
+    <span class="preview">Preview · in testing</span>
+    <h2>Then there's the game.</h2>
+    <p>There are plenty of pool games. Most are built around coins and cue upgrades, or swipe to shoot. This one is tied to the pool you actually play: the same rival, the same book, the same playlist. And the stroke itself is the skill.</p>
+  </div>
+
+  <section class="stroke">
+    <div>
+      <span class="tag" style="--c: var(--felt)">The stroke</span>
+      <h2>Pull back, push through straight</h2>
+      <p style="color:var(--soft);max-width:52ch">You don't swipe a power meter. You pull back on the stroke pad and push through, like a real cue, and the game reads how straight you were and whether you followed through. After every shot it tells you.</p>
+      <div class="card"><div class="who">After the shot <span>cue ball speed</span></div><p>3.0 m/s · medium. Straight, followed through.</p></div>
+      <p style="color:var(--soft);max-width:52ch;margin:0">Walk around the table to line up, set the cue's angle, put spin on with the tip, and chalk the cue. Watch any shot again from the overhead view.</p>
+    </div>
+    <div class="phones">
+      <img src="img/phone-aim.jpg" alt="Aiming down the cue: spin pad, cue angle and the stroke pad that says pull back for power, push straight through" loading="lazy" width="700" height="1522">
+      <img src="img/phone-stroke.jpg" alt="The table from above after a break, with the stroke card reading 3.0 metres a second, medium, straight, followed through" loading="lazy" width="700" height="1522" style="margin-top:56px">
+    </div>
+  </section>
+
+  <section class="feature" style="--c: var(--felt)">
+    <div>
+      <span class="tag" style="--c: var(--felt)">Play tab</span>
+      <h2>Real rules, and it counts in the book</h2>
+      <ul class="ticks">
+        <li>Pass and play 8-ball under APA rules, or 9-ball with a proper legal break.</li>
+        <li>Play a set for the book: each rack is recorded once both players OK it, marked with a controller in Record.</li>
+        <li>Solids and stripes and the wild moments come from the game itself, the same way you'd tag them at a real table.</li>
+        <li>Practice with the table to yourself: no rules, ball in hand whenever you want it.</li>
+        <li>Rematch with the winner breaking, and a stats card when the game ends.</li>
+      </ul>
+    </div>
+    <figure class="shot phone"><img src="img/phone-play.jpg" alt="The Play tab: 8-ball or 9-ball, pass and play with a switch to play a set for the book, practice, and Play on Apple TV" loading="lazy" width="700" height="1522"><figcaption>iPhone · the Play tab</figcaption></figure>
+  </section>
+
+  <section class="tv">
+    <div class="head">
+      <span class="tag">Apple TV</span>
+      <h2>Couch pool. Your phone is the cue.</h2>
+      <p>Open Pool Position on the Apple TV and the table fills the big screen. Everyone's iPhone joins with a four-digit code, then you aim and stroke on the phone in your hand. Pass the phone when it's the other player's turn. No game controllers needed.</p>
+    </div>
+    <div class="grid">
+      <div class="stack">
+        <img src="img/tv-rack.jpg" alt="The Apple TV table with the 9-ball rack, waiting for players to join with code 4242" loading="lazy" width="1600" height="900">
+        <img src="img/tv-break.jpg" alt="The Apple TV after the break: nothing down, Player 1's shot, pass the phone and tap Ready" loading="lazy" width="1600" height="900">
+      </div>
+      <img class="remote" src="img/phone-remote.jpg" alt="The iPhone as the controller: move and look pads with shoot buttons" loading="lazy" width="700" height="1522">
+    </div>
+    <div class="join" role="img" aria-label="An iPhone joins the Apple TV on the home network using a four-digit code">
+      <div class="dev"><b>iPhone</b><small>aim, stroke, spin</small></div>
+      <div class="link"><span>home Wi-Fi</span><span class="b">join with a 4-digit code</span></div>
+      <div class="dev"><b>Apple TV</b><small>the table, big</small><div class="code">4242</div></div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div>
+      <p class="eyebrow">How the game works</p>
+      <h2>Physics you can check</h2>
+      <p>Pool players are picky, so the game doesn't fake it. The simulation is written in plain Swift and follows published models of how pool balls really behave, ported from the open-source pooltool project and tested against its reference shots. It runs on a fixed 1 millisecond step, so the same shot always plays out the same way, and the 3D view only draws what the physics decides.</p>
+      <p>It has to hold 60 frames a second on every device it runs on.</p>
+    </div>
+    <div class="pipe">
+      <div>Cue strike <span>squirt, spin, cue elevation</span></div>
+      <div>Ball on ball <span>with throw (Alciatore)</span></div>
+      <div>Cushions <span>compliant rails (Stronge)</span></div>
+      <div>Cloth <span>rolling resistance by cloth</span></div>
+      <div>Rules <span>APA 8-ball · 9-ball, pure and tested</span></div>
+      <div>Draw <span>RealityKit, iPhone · iPad · Apple TV</span></div>
+    </div>
+  </section>
+
+  <section class="note">
+    <p><strong>About this project.</strong> Pool Position is a personal project, built for one real rivalry and shared freely. The scorebook is free; the game is an early preview, still in testing and changing every week. There's more about the app, plus privacy and support, at <a href="https://pool.joshramey.com">pool.joshramey.com</a>.</p>
+    <p>Screenshots are real: recent builds running in Apple's iPhone, iPhone Duo, iPad and Apple TV simulators, with a sample book. Jordan and Casey are made-up players.</p>
+  </section>
+</main>
+</body>
+</html>
