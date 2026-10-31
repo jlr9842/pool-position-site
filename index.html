@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Pool Position: a scorebook for two pool rivals on iPhone, iPhone Duo and iPad, and an early look at its 3D pool game for iPhone and Apple TV.">
+<meta name="description" content="Pool Position: a scorebook for two pool rivals on iPhone, iPhone Duo and iPad, and its 3D pool game for iPhone and Apple TV, in testing.">
 <meta property="og:title" content="Pool Position">
 <meta property="og:description" content="A scorebook for two pool rivals, and a pool game that plays like your real table.">
 <meta property="og:image" content="https://poolposition.joshramey.com/img/tv-rack.jpg">
@@ -167,11 +167,11 @@ ul.ticks li::before { content: ""; position: absolute; left: 0; top: .5em; width
       <p class="eyebrow">iPhone · iPhone Duo · iPad · Apple TV</p>
       <h1>Pool Position</h1>
       <p class="lede">A scorebook for two rivals who play real pool, week after week.</p>
-      <p class="sub">Score every set at the table, keep the all-time record, remember the halls and play your own music. Next to it, an early look at a 3D pool game that keeps score in the same book, with your phone as the cue.</p>
+      <p class="sub">Score every set at the table, keep the all-time record, remember the halls and play your own music. Next to it, a 3D pool game that keeps score in the same book, with your phone as the cue. It plays on the phone alone, on two phones, or on the Apple TV.</p>
     </div>
     <div class="devices">
       <img src="img/phone-table.jpg" alt="The Table page on iPhone: Jordan vs Casey, 73 to 70 in all-time sets, with buttons to rack a best-of-three 8-ball or 9-ball set" width="700" height="1522">
-      <img src="img/phone-aim.jpg" alt="The pool game on iPhone: looking down the cue at the racked balls, with a spin pad and a stroke pad" width="700" height="1522">
+      <img src="img/phone-menu.jpg" alt="The game's menu on iPhone over the table: Play, Career marked as coming, Achievements, Options, Jukebox and Back to the book" width="700" height="1522">
     </div>
   </header>
 
@@ -247,60 +247,107 @@ ul.ticks li::before { content: ""; position: absolute; left: 0; top: .5em; width
   </section>
 
   <div class="turn">
-    <span class="preview">Preview · in testing</span>
+    <span class="preview">In TestFlight · still changing</span>
     <h2>Then there's the game.</h2>
     <p>There are plenty of pool games. Most are built around coins and cue upgrades, or swipe to shoot. This one is tied to the pool you actually play: the same rival, the same book, the same playlist. And the stroke itself is the skill.</p>
   </div>
+
+  <section class="feature" style="--c: var(--felt)">
+    <div>
+      <span class="tag" style="--c: var(--felt)">The menu</span>
+      <h2>One menu, over the table</h2>
+      <p>The game opens on a menu laid over the live table, the same on the phone, the Apple TV and a phone used as a controller.</p>
+      <ul class="ticks">
+        <li>Play: pass and play on one phone, two phones, the Apple TV, or practice on your own.</li>
+        <li>Options: your cue, the cloth colour, the hall and a 7, 8 or 9 ft table, the aiming guide, sound and a larger HUD.</li>
+        <li>Achievements, and the jukebox with the book's playlist.</li>
+        <li>Back to the book is one tap away.</li>
+      </ul>
+    </div>
+    <figure class="shot pair"><img src="img/phone-menu.jpg" alt="The game's menu on iPhone: Play, Achievements, Options, Jukebox" loading="lazy" width="700" height="1522"><img src="img/phone-options.jpg" alt="Options: a cue for each player (Blue Diamonds, Hearts or the house cue), cloth colours, the hall, the table size and the guide" loading="lazy" width="700" height="1522"><figcaption>iPhone · the menu and Options</figcaption></figure>
+  </section>
 
   <section class="stroke">
     <div>
       <span class="tag" style="--c: var(--felt)">The stroke</span>
       <h2>Pull back, push through straight</h2>
-      <p style="color:var(--soft);max-width:52ch">You don't swipe a power meter. You pull back on the stroke pad and push through, like a real cue, and the game reads how straight you were and whether you followed through. After every shot it tells you.</p>
+      <p style="color:var(--soft);max-width:52ch">You don't swipe a power meter. You pull back on the stroke pad and push through, like a real cue, and the game reads how straight you were and whether you followed through. After every shot it tells you in one line.</p>
       <div class="card"><div class="who">After the shot <span>cue ball speed</span></div><p>3.0 m/s · medium. Straight, followed through.</p></div>
-      <p style="color:var(--soft);max-width:52ch;margin:0">Walk around the table to line up, set the cue's angle, put spin on with the tip, and chalk the cue. Watch any shot again from the overhead view.</p>
-      <p style="color:var(--soft);max-width:52ch;margin:0">The table is dressed from photos of a real pool hall: the cloth's nap, the oak rails, the hall beyond the doorway. The pockets are cut to the same size the physics plays.</p>
+      <p style="color:var(--soft);max-width:52ch;margin:0 0 14px">Swipe the line up for more: the cue ball's real speed, how far off line the stroke went and any side you put on.</p>
+      <p style="color:var(--soft);max-width:52ch;margin:0">Walk around the table to line up, set the cue's angle and put spin on with the tip. Watch any shot again from the overhead view.</p>
     </div>
     <div class="phones">
-      <img src="img/phone-aim.jpg" alt="Aiming down the cue: spin pad, cue angle and the stroke pad that says pull back for power, push straight through" loading="lazy" width="700" height="1522">
-      <img src="img/phone-stroke.jpg" alt="The table from above after a break, with the stroke card reading 3.0 metres a second, medium, straight, followed through" loading="lazy" width="700" height="1522" style="margin-top:56px">
+      <img src="img/phone-aim.jpg" alt="Aiming down the cue: the aim stick, the spin face and the stroke pad that says pull back for power, push straight through" loading="lazy" width="700" height="1522">
+      <img src="img/phone-stroke.jpg" alt="The table from above after a break, with the stroke line reading 3.0 metres a second, medium, straight, followed through" loading="lazy" width="700" height="1522" style="margin-top:56px">
     </div>
   </section>
 
-  <section class="feature" style="--c: var(--felt)">
+  <section class="feature flip" style="--c: var(--chalk)">
     <div>
-      <span class="tag" style="--c: var(--felt)">Play tab</span>
-      <h2>Real rules, and it counts in the book</h2>
+      <span class="tag">Guide and chalk</span>
+      <h2>Help when you want it, chalk when you need it</h2>
       <ul class="ticks">
-        <li>Pass and play 8-ball under APA rules, or 9-ball with a proper legal break.</li>
-        <li>Play a set for the book: each rack is recorded once both players OK it, marked with a controller in Record.</li>
-        <li>Solids and stripes and the wild moments come from the game itself, the same way you'd tag them at a real table.</li>
-        <li>Practice with the table to yourself: no rules, ball in hand whenever you want it.</li>
-        <li>Rematch with the winner breaking, and a stats card when the game ends.</li>
-        <li>Real pocket jaws: a ball that clips one can rattle out.</li>
+        <li>An aiming guide you set per player: Short shows where the cue ball meets the first ball and where that ball heads; Long runs the real physics for the shot you're about to play, through one cushion. Or turn it off.</li>
+        <li>A pot lights the object ball's line green, a scratch lights the cue ball's red.</li>
+        <li>Chalking: the tip comes up in front of you, you pick the cube up off the rail and rub it on with your finger, and you can see how much chalk is on.</li>
       </ul>
     </div>
-    <figure class="shot phone"><img src="img/phone-play.jpg" alt="The Play tab: 8-ball or 9-ball, pass and play with a switch to play a set for the book, practice, and Play on Apple TV" loading="lazy" width="700" height="1522"><figcaption>iPhone · the Play tab</figcaption></figure>
+    <figure class="shot pair"><img src="img/phone-guide.jpg" alt="The overhead view while aiming the break, with the long guide drawing the cue ball's path into the rack" loading="lazy" width="700" height="1522"><img src="img/phone-chalk.jpg" alt="Chalking: the cue tip face on with the chalk cube held up to it, and a card that says rub the chalk on" loading="lazy" width="700" height="1522"><figcaption>iPhone · the long guide from overhead, and chalking</figcaption></figure>
+  </section>
+
+  <section class="feature" style="--c: var(--solid)">
+    <div>
+      <span class="tag" style="--c: var(--solid)">Rules and the book</span>
+      <h2>Real rules, and it counts in the book</h2>
+      <ul class="ticks">
+        <li>8-ball under APA rules, or 9-ball with a proper legal break.</li>
+        <li>Play a set for the book: a rack goes in the book once you count it, and it shows in Record with a controller beside it.</li>
+        <li>Solids and stripes and the wild moments come from the game itself, the same way you'd tag them at a real table.</li>
+        <li>Achievements for the shots people talk about: a bank, a kick, a combo on the 9, a golden break, break and run. They show on the game-over card. Practice earns none.</li>
+        <li>Rematch with the winner breaking, concede a lost rack, and real pocket jaws: a ball that clips one can rattle out.</li>
+      </ul>
+    </div>
+    <figure class="shot phone"><img src="img/phone-achievements.jpg" alt="Achievements: 3 of 18, with 8 on the break and Clean rack earned by Jordan and the rest locked" loading="lazy" width="700" height="1522"><figcaption>iPhone · Achievements</figcaption></figure>
   </section>
 
   <section class="tv">
     <div class="head">
-      <span class="tag">Apple TV</span>
+      <span class="tag">Apple TV and two phones</span>
       <h2>Couch pool. Your phone is the cue.</h2>
-      <p>Open Pool Position on the Apple TV and the table fills the big screen. Everyone's iPhone joins with a four-digit code, then you aim and stroke on the phone in your hand. Pass the phone when it's the other player's turn. No game controllers needed.</p>
+      <p>Open Pool Position on the Apple TV and the table fills the big screen. Each iPhone joins with a four-digit code, then you aim and stroke on the phone in your hand: Walk, Chalk, Spin, Shoot and Menu along the bottom, the same as playing on the phone alone. If one phone is away, the other can take the shot.</p>
     </div>
     <div class="grid">
       <div class="stack">
-        <img src="img/tv-rack.jpg" alt="The Apple TV table in a panelled room with the 9-ball racked and one phone joined with code 4242" loading="lazy" width="1600" height="900">
-        <img src="img/tv-break.jpg" alt="The Apple TV after the break: nothing down, pass to Player 1, then tap Ready, with the table still in view" loading="lazy" width="1600" height="900">
+        <img src="img/tv-rack.jpg" alt="The Apple TV lobby over the table: join code 4242, Jordan's phone in seat one and seat two waiting for a phone" loading="lazy" width="1600" height="900">
+        <img src="img/tv-break.jpg" alt="The Apple TV after the break: Jordan on solids top left, Casey on stripes top right with the balls each still needs, an achievement for a bank shot, and the guide in front of the cue" loading="lazy" width="1600" height="900">
       </div>
-      <img class="remote" src="img/phone-remote.jpg" alt="The iPhone as the controller: move and look sticks with shoot buttons" loading="lazy" width="700" height="1522">
+      <img class="remote" src="img/phone-remote.jpg" alt="The iPhone as the controller: your shot, Jordan, with the aim stick, the spin face, the stroke pad and the five buttons" loading="lazy" width="700" height="1522">
     </div>
     <div class="join" role="img" aria-label="An iPhone joins the Apple TV on the home network using a four-digit code">
-      <div class="dev"><b>iPhone</b><small>aim, stroke, spin</small></div>
+      <div class="dev"><b>iPhone</b><small>aim, stroke, spin, chalk</small></div>
       <div class="link"><span>home Wi-Fi</span><span class="b">join with a 4-digit code</span></div>
       <div class="dev"><b>Apple TV</b><small>the table, big</small><div class="code">4242</div></div>
     </div>
+    <ul class="ticks" style="margin-top:40px;max-width:70ch">
+      <li>On the TV, each player has a corner: their name, solids or stripes, and the balls they still need. A ring fills round the cue ball as you pull back on the phone, and the stroke line shows under the shooter's corner after the shot.</li>
+      <li>No phone handy: play on the TV with the Siri Remote or a game controller.</li>
+      <li>No TV: two phones play each other on one table, one phone hosting and the other joining with the code.</li>
+      <li>The book's playlist plays on the TV during the game, if the Apple TV is signed in to Apple Music.</li>
+    </ul>
+  </section>
+
+  <section class="feature flip" style="--c: var(--oak)">
+    <div>
+      <span class="tag" style="--c: var(--oak)">The table</span>
+      <h2>Dressed from real photos</h2>
+      <ul class="ticks">
+        <li>The balls are painted from photos of a real set: the colours, the number discs, the ivory.</li>
+        <li>The cloth's nap, the rails and the pockets come from photos of real tables, and the pockets are cut to the same size the physics plays.</li>
+        <li>Two cues scanned from real ones, alongside the house cue. Each player picks theirs in Options.</li>
+        <li>Three halls to play in. The newest, a modern home lounge, is a first pass and still being built.</li>
+      </ul>
+    </div>
+    <figure class="shot wide" style="width:min(100%,620px)"><img src="img/tv-handoff.jpg" alt="The Home Lounge on the Apple TV: an 8 ft table in black lacquer with red-orange cloth, and Jordan breaks across the middle" loading="lazy" width="1600" height="900"><figcaption>Apple TV · the turn hand-off in the Home Lounge</figcaption></figure>
   </section>
 
   <section class="how">
@@ -321,8 +368,8 @@ ul.ticks li::before { content: ""; position: absolute; left: 0; top: .5em; width
   </section>
 
   <section class="note">
-    <p><strong>About this project.</strong> Pool Position is a personal project, built for one real rivalry and shared freely. The scorebook is free; the game is an early preview, still in testing and changing every week. There's more about the app, plus privacy and support, at <a href="https://pool.joshramey.com">pool.joshramey.com</a>.</p>
-    <p>Screenshots are real: recent builds running in Apple's iPhone, iPhone Duo, iPad and Apple TV simulators, with a sample book. Jordan and Casey are made-up players.</p>
+    <p><strong>About this project.</strong> Pool Position is a personal project, built for one real rivalry and shared freely. The scorebook is free; the game is in TestFlight, still in testing and changing every week. There's more about the app, plus privacy and support, at <a href="https://pool.joshramey.com">pool.joshramey.com</a>.</p>
+    <p>Screenshots are real: build 1.2 (45) running in Apple's iPhone, iPhone Duo, iPad and Apple TV simulators, with a sample book. Jordan and Casey are made-up players.</p>
   </section>
 </main>
 </body>
